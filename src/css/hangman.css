@@ -1,0 +1,349 @@
+* {
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+.hangman {
+  max-width: 600px;
+  min-height: 50vh;
+  margin: 0 auto;
+  position: relative;
+  background: #31353f;
+  font-family: 'Lato', sans-serif;
+  font-weight: 700;
+  color: #f5f5f5;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
+
+.hangman .wrapper {
+  padding: 0 10px;
+}
+
+@media screen and (min-width: 500px) {
+  .hangman .wrapper {
+    padding: 0 16px;
+  }
+}
+
+.hangman .controls {
+  padding: 10px 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+}
+
+@media screen and (min-width: 500px) {
+  .hangman .controls {
+    padding: 16px 0;
+  }
+}
+
+.hangman .controls button {
+  padding: 8px 12px;
+  background: #ddd;
+  font-family: inherit;
+  color: #333;
+  font-size: 18px;
+  font-weight: bold;
+  text-transform: uppercase;
+  line-height: 28px;
+  border: none;
+  outline: transparent;
+  cursor: pointer;
+}
+
+.hangman .controls button:hover {
+  background: #fff;
+}
+
+.hangman .controls .controls-words-box {
+  padding: 8px 16px;
+  background: #3e4350;
+}
+
+.hangman .controls .controls-words-box .controls-words {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.hangman .controls .controls-words-box .controls-words span {
+  width: 44px;
+  margin: 0 8px;
+  display: inline-block;
+  font-size: 30px;
+  font-weight: 700;
+  text-align: center;
+}
+
+.hangman .controls .controls-words-box .controls-words svg {
+  width: 28px;
+  height: 28px;
+  cursor: pointer;
+}
+
+.hangman .controls .controls-words-box .controls-words svg.disabled {
+  opacity: 0.3;
+  pointer-events: none;
+}
+
+.hangman .controls .controls-words-box .controls-words svg:hover {
+  -webkit-filter: brightness(1.5);
+          filter: brightness(1.5);
+}
+
+.hangman .controls .controls-words-box .controls-words.disabled {
+  pointer-events: none;
+}
+
+.hangman .puzzle {
+  margin: 0 0 16px;
+  padding: 12px 0 10px;
+  background: #3e4350;
+}
+
+.hangman .puzzle .puzzle-word {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.hangman .puzzle .letter-card {
+  width: 20px;
+  height: 24px;
+  margin: 0 4px 4px 0;
+  font-size: 18px;
+  line-height: 24px;
+  font-weight: 700;
+  text-transform: uppercase;
+  text-align: center;
+  color: #fed;
+  background: #fed;
+  pointer-events: none;
+}
+
+@media screen and (min-width: 500px) {
+  .hangman .puzzle .letter-card {
+    width: 30px;
+    height: 36px;
+    margin: 0 10px 10px 0;
+    font-size: 26px;
+    line-height: 36px;
+  }
+}
+
+.hangman .puzzle .letter-card.found {
+  color: #333;
+  -webkit-transition: color 0.5s;
+  transition: color 0.5s;
+}
+
+.hangman .player-area {
+  padding: 0 0 32px;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 1fr 100px;
+      grid-template-columns: 1fr 100px;
+  grid-gap: 16px;
+}
+
+@media screen and (min-width: 500px) {
+  .hangman .player-area {
+    -ms-grid-columns: 1fr 120px;
+        grid-template-columns: 1fr 120px;
+  }
+}
+
+.hangman .player-area .guesses {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -ms-flex-item-align: end;
+      align-self: flex-end;
+  position: relative;
+}
+
+.hangman .player-area .guesses .overlay {
+  width: 106%;
+  height: 106%;
+  margin-top: -3%;
+  font-size: 40px;
+  letter-spacing: 2px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  font-weight: 700;
+  position: absolute;
+  top: 0;
+  left: -3%;
+  background: rgba(0, 0, 0, 0.9);
+}
+
+@media screen and (min-width: 500px) {
+  .hangman .player-area .guesses .overlay {
+    font-size: 60px;
+    line-height: 120px;
+    letter-spacing: 4px;
+  }
+}
+
+.hangman .player-area .guesses .overlay.fail {
+  color: #a00;
+}
+
+.hangman .player-area .guesses .overlay.win {
+  color: #0a0;
+}
+
+.hangman .player-area .guesses .guess-card {
+  width: 24px;
+  height: 28px;
+  margin: 0 6px 6px 0;
+  font-size: 18px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #333;
+  background: #eee;
+  -webkit-box-shadow: 2px 3px 3px 0 rgba(0, 0, 0, 0.3);
+          box-shadow: 2px 3px 3px 0 rgba(0, 0, 0, 0.3);
+  position: relative;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
+@media screen and (min-width: 500px) {
+  .hangman .player-area .guesses .guess-card {
+    width: 28px;
+    height: 34px;
+    margin: 0 10px 10px 0;
+    font-size: 24px;
+  }
+}
+
+.hangman .player-area .guesses .guess-card:hover {
+  background: #fff;
+}
+
+.hangman .player-area .guesses .guess-card.out {
+  background: #bbb;
+  pointer-events: none;
+}
+
+.hangman .player-area .guesses .guess-card.out::before {
+  content: '/';
+  position: absolute;
+  top: -12px;
+  left: 5px;
+  font-size: 30px;
+  font-weight: 400;
+  color: #f00;
+  opacity: 0.6;
+}
+
+@media screen and (min-width: 500px) {
+  .hangman .player-area .guesses .guess-card.out::before {
+    font-size: 35px;
+    top: -14px;
+  }
+}
+
+.hangman .player-area .fails {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: end;
+      -ms-flex-align: end;
+          align-items: flex-end;
+}
+
+.hangman .player-area .fails span {
+  font-size: 40px;
+  font-weight: 700;
+  color: #a00;
+}
+
+.hangman .player-area .fails .hm-img svg {
+  width: 100%;
+  display: block;
+}
+
+.hangman .spinner {
+  width: 80px;
+  height: 80px;
+  margin: 3rem auto;
+}
+
+.hangman .spinner div {
+  width: 100%;
+  height: 100%;
+  border: 3px solid white;
+  border-radius: 50%;
+  position: relative;
+  -webkit-animation: rotate 1s infinite;
+          animation: rotate 1s infinite;
+}
+
+.hangman .spinner div::before {
+  content: '';
+  position: absolute;
+  top: 0px;
+  right: 0;
+  width: 24px;
+  height: 20px;
+  -webkit-transform: rotate(45deg);
+          transform: rotate(45deg);
+  background: #282c34;
+}
+
+@-webkit-keyframes rotate {
+  to {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+  }
+}
+
+@keyframes rotate {
+  to {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+  }
+}

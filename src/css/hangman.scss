@@ -1,0 +1,249 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+@mixin mQ($arg) {
+    @media screen and (min-width: $arg) {
+        @content;
+    }
+}
+
+.hangman {
+    max-width: 600px;
+    min-height: 50vh;
+    margin: 0 auto;
+    position: relative;
+    background: #31353f;
+    font-family: 'Lato', sans-serif;
+    font-weight: 700;
+    color: #f5f5f5;
+    user-select: none;
+    .wrapper {
+        padding: 0 10px;
+        @include mQ(500px) {
+            padding: 0 16px;
+        }
+    }
+    .controls {
+        padding: 10px 0;
+        @include mQ(500px) {
+            padding: 16px 0;
+        }
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        button {
+            padding: 8px 12px;
+            background: #ddd;
+            font-family: inherit;
+            color: #333;
+            font-size: 18px;
+            font-weight: bold;
+            text-transform: uppercase;
+            line-height: 28px;
+            border: none;
+            outline: transparent;
+            cursor: pointer;
+            &:hover {
+                background: #fff;
+            }
+        }
+        .controls-words-box {
+            padding: 8px 16px;
+            background: #3e4350;
+            .controls-words {
+                display: flex;
+                align-items: center;
+                span {
+                    width: 44px;
+                    margin: 0 8px;
+                    display: inline-block;
+                    font-size: 30px;
+                    font-weight: 700;
+                    text-align: center;
+                }
+                svg {
+                    width: 28px;
+                    height: 28px;
+                    cursor: pointer;
+                    &.disabled {
+                        opacity: 0.3;
+                        pointer-events: none;
+                    }
+                    &:hover {
+                        filter: brightness(1.5);
+                    }
+                }
+                &.disabled {
+                    pointer-events: none;
+                }
+            }
+        }
+    }
+
+    .puzzle {
+        margin: 0 0 16px;
+        padding: 12px 0 10px;
+        background: #3e4350;
+        .puzzle-word {
+            display: flex;
+        }
+        .letter-card {
+            width: 20px;
+            height: 24px;
+            margin: 0 4px 4px 0;
+            font-size: 18px;
+            line-height: 24px;
+            @include mQ(500px) {
+                width: 30px;
+                height: 36px;
+                margin: 0 10px 10px 0;
+                font-size: 26px;
+                line-height: 36px;
+            }
+            font-weight: 700;
+            text-transform: uppercase;
+            text-align: center;
+            color: #fed;
+            background: #fed;
+            pointer-events: none;
+            &.found {
+                color: #333;
+                transition: color 0.5s;
+            }
+        }
+    }
+
+    .player-area {
+        padding: 0 0 32px;
+        display: grid;
+        grid-template-columns: 1fr 100px;
+        grid-gap: 16px;
+        @include mQ(500px) {
+            grid-template-columns: 1fr 120px;
+        }
+        .guesses {
+            display: flex;
+            flex-wrap: wrap;
+            align-self: flex-end;
+            position: relative;
+            .overlay {
+                width: 106%;
+                height: 106%;
+                margin-top: -3%;
+                font-size: 40px;
+                letter-spacing: 2px;
+                @include mQ(500px) {
+                    font-size: 60px;
+                    line-height: 120px;
+                    letter-spacing: 4px;
+                }
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                user-select: none;
+                font-weight: 700;
+                position: absolute;
+                top: 0;
+                left: -3%;
+                background: rgba(0, 0, 0, 0.9);
+                &.fail {
+                    color: #a00;
+                }
+                &.win {
+                    color: #0a0;
+                }
+            }
+            .guess-card {
+                width: 24px;
+                height: 28px;
+                margin: 0 6px 6px 0;
+                font-size: 18px;
+                @include mQ(500px) {
+                    width: 28px;
+                    height: 34px;
+                    margin: 0 10px 10px 0;
+                    font-size: 24px;
+                }
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                font-weight: 700;
+                text-transform: uppercase;
+                color: #333;
+                background: #eee;
+                box-shadow: 2px 3px 3px 0 rgba(0, 0, 0, 0.3);
+                position: relative;
+                cursor: pointer;
+                -webkit-tap-highlight-color: transparent;
+                &:hover {
+                    background: #fff;
+                }
+                &.out {
+                    background: #bbb;
+                    pointer-events: none;
+                    &::before {
+                        content: '/';
+                        position: absolute;
+                        top: -12px;
+                        left: 5px;
+                        font-size: 30px;
+                        font-weight: 400;
+                        color: #f00;
+                        opacity: 0.6;
+                        @include mQ(500px) {
+                            font-size: 35px;
+                            top: -14px;
+                        }
+                    }
+                }
+            }
+        }
+        .fails {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            span {
+                font-size: 40px;
+                font-weight: 700;
+                color: #a00;
+            }
+            .hm-img {
+                svg {
+                    width: 100%;
+                    display: block;
+                }
+            }
+        }
+    }
+    .spinner {
+        width: 80px;
+        height: 80px;
+        margin: 3rem auto;
+        div {
+            width: 100%;
+            height: 100%;
+            border: 3px solid white;
+            border-radius: 50%;
+            position: relative;
+            animation: rotate 1s infinite;
+            &::before {
+                content: '';
+                position: absolute;
+                top: 0px;
+                right: 0;
+                width: 24px;
+                height: 20px;
+                transform: rotate(45deg);
+                background: #282c34;
+            }
+        }
+    }
+    @keyframes rotate {
+        to {
+            transform: rotate(360deg);
+        }
+    }
+}
