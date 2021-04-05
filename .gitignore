@@ -10,7 +10,9 @@
 
 # production
 /build
-/public
+/public/css
+/public/img
+/public/index.html
 
 
 # misc
