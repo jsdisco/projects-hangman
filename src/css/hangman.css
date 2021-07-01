@@ -307,8 +307,8 @@
 }
 
 .hangman .spinner {
-  width: 80px;
-  height: 80px;
+  width: 40px;
+  height: 40px;
   margin: 3rem auto;
 }
 
@@ -327,11 +327,11 @@
   position: absolute;
   top: 0px;
   right: 0;
-  width: 24px;
-  height: 20px;
+  width: 14px;
+  height: 12px;
   -webkit-transform: rotate(45deg);
           transform: rotate(45deg);
-  background: #282c34;
+  background: #3e4350;
 }
 
 @-webkit-keyframes rotate {

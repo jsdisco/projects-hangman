@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import Controls from './components/Controls.js';
 import Puzzle from './components/Puzzle.js';
 import PlayerArea from './components/PlayerArea.js';
-import Spinner from './components/Spinner.js';
 import getSvgChunks from './utils/svgChunks.js';
 import useFetch from './hooks/useFetch.js';
 import './css/hangman.css';
@@ -61,9 +60,8 @@ function Hangman() {
     return (
         <div className="hangman">
             <Controls maxWords={maxWords} updateMaxWords={updateMaxWords} startGame={startGame} />
-            {isLoading && <Spinner />}
             {errorMsg && <p>{errorMsg}</p>}
-            {currWords && <Puzzle currWords={currWords} triedLetters={triedLetters} gameResult={gameResult} />}
+            <Puzzle isLoading={isLoading} currWords={currWords} triedLetters={triedLetters} gameResult={gameResult} />
             {currWords && (
                 <PlayerArea
                     triedLetters={triedLetters}
